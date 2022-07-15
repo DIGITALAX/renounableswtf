@@ -63,7 +63,7 @@ const MyApp = ({ Component, pageProps, store, err }) => {
     <Provider store={store}>
       <Head>
         <title>Renounables.wtf</title>
-        <link rel="icon" type="image/png" href="/images/icons/favicon-digitalax.ico" />
+        <link rel="icon" type="image/png" href="/images/icons/favicon.ico" />
       </Head>
       <UseWalletProvider chainId={137}>
         <InitWrapper>

@@ -20,10 +20,10 @@ import Button from '@components/Button'
 import Modal from '@components/modal'
 
 const cryptoList = [
-  {
-    name: 'matic',
-    label: 'MATIC'
-  },
+  // {
+  //   name: 'matic',
+  //   label: 'MATIC'
+  // },
   {
     name: 'mona',
     label: 'MONA'
@@ -32,10 +32,10 @@ const cryptoList = [
     name: 'weth',
     label: 'ETH'
   },
-  {
-    name: 'usdt',
-    label: 'USDT'
-  }
+  // {
+  //   name: 'usdt',
+  //   label: 'USDT'
+  // }
 ]
 
 
