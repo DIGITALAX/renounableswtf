@@ -29,11 +29,12 @@ const SwitchNetworkModal = () => {
           onClose={() => handleClose()}
           title={'Please Switch to Polygon Network!'}
           titleStyle={styles.textCenter}
+          className='max-w-lg'
         >
           <div className={styles.footer}>
             <p className={styles.footerCaption}>
               <span>
-                Make sure you are connected to Polygon Mainnet and also have $MATIC in your wallet to make crypto payment!
+                Make sure you are connected to Polygon Mainnet and try again.
               </span>
             </p>
             <div className={styles.selectWrapper}>

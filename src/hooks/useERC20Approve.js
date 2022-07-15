@@ -72,17 +72,12 @@ export default function useERC20Approve(amount) {
   const account = useSelector(getAccount)
   const chainId = useSelector(getChainId)
   const selectedCrypto = useSelector(getSelectedCrypto)
-  console.log('config2: ', config)
   const targetAddress = config.PAYMENT_ACCEPT['matic']
 
   const [approved, setApproved] = useState(false)
-
   const allowance = useTokenAllowance()
 
   useEffect(() => {
-    console.log('allowance: ', parseFloat(allowance))
-    console.log('amount: ', parseFloat(amount))
-
     if (selectedCrypto && parseFloat(allowance) >= 10000000000) {
       setApproved(true)
     } else {
@@ -125,8 +120,6 @@ export default function useERC20Approve(amount) {
       const gas = await web3.eth.getGasPrice()
       const address = await getERC20ContractAddressByChainId(selectedCrypto, chainId)    
       
-      console.log('gas price: ', gas)
-      console.log('contract.methods: ', contract)
       const listener = contract.methods
         .buyOffer(
           address,
@@ -156,7 +149,5 @@ export default function useERC20Approve(amount) {
     }    
   }
 
-  console.log('selectedCrypto: ', selectedCrypto)
-  console.log('approved: ', approved)
   return { approved, approveFunc, purchaseOffer }
 }

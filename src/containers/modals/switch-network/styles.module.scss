@@ -1,14 +1,16 @@
 .footer {
   margin-top: -24px;
+
   .footerCaption {
     margin-top: 48px;
-    font-size: 0.75rem;
-    line-height: 15px;
+    font-size: 1.5rem;
+    line-height: 100%;
     letter-spacing: 1.5px;
     font-weight: bold;
     margin-bottom: 10px;
     text-transform: uppercase;
     text-align: center;
+    @apply font-extralight;
 
     b {
       font-size: 1rem;
@@ -41,8 +43,9 @@
 .button {
   min-width: 170px;
   height: 44px;
-  background-color: #fff;
-  color: #000 !important
+  @apply text-2xl;
+  background-color: transparent;
+  color: white !important
 }
 
 .error {

@@ -18,17 +18,11 @@
   max-width: 840px;
   margin: 200px auto;
   word-break: break-word;
-  background-color: #000;
   background-size: 100%;
   border: 1px solid #ffffff;
+  border-radius: 10px;
   box-sizing: border-box;
-
-  & p,
-  & span,
-  & button,
-  & a {
-    color: white;
-  }
+  color: white;
 }
 
 .closeIcon {

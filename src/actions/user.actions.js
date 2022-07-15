@@ -15,6 +15,45 @@ import { setWeb3Provider } from '@services/web3-provider.service'
 import BaseActions from './base-actions'
 
 class UserActions extends BaseActions {
+  trytoCollect(source) {
+    return async (dispatch) => {
+      localStorage.setItem(STORAGE_WALLET, source)
+      await setWeb3Provider()
+      
+      if (source === WALLET_METAMASK) {
+        if (!isMetamaskInstalled()) {
+          dispatch(openNotInstalledMetamask())
+          console.log('METAMASK WAS NOT DETECTED ON TRY TO LOGIN')
+          return
+        }
+
+        const { ethereum } = window
+
+        try {
+          const [account] = await ethereum.request({
+            method: 'eth_requestAccounts',
+          })
+
+          if (!account) {
+            console.error('Account is epmty.')
+            return
+          }
+
+          
+          localStorage.setItem('account', account)
+          dispatch(this.setValue('account', account))
+          // dispatch(openSignupModal())
+          dispatch(globalActions.initApp())
+      
+          dispatch(openCryptoOptionsModal())
+        } catch (e) {
+          console.error(e.message)
+        }
+      }
+    }
+    
+  }
+
   tryToConnect(source) {
     return async (dispatch) => {
       localStorage.setItem(STORAGE_WALLET, source)
@@ -39,10 +78,8 @@ class UserActions extends BaseActions {
             return
           }
 
-          console.log('account: ', account)
           localStorage.setItem('account', account)
           dispatch(this.setValue('account', account))
-          // dispatch(openSignupModal())
           dispatch(globalActions.initApp())
         } catch (e) {
           console.error(e.message)

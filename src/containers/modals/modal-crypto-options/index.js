@@ -123,7 +123,7 @@ const ModalCryptoOptions = () => {
             </div>
 
             <Button
-              className='bg-black flex justify-center text-white w-28 mt-5'
+              className='bg-black flex justify-center text-white w-28 mt-5 text-2xl'
               onClick={onApprove}
               disabled={!cryptoList.length}
               loading={loading}

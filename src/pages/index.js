@@ -49,9 +49,9 @@ function Landing(props) {
 
     if (chainId != POLYGON_CHAINID) {
       dispatch(openSwitchNetworkModal())
-    }
-
-    dispatch(openCryptoOptionsModal())
+    } else {
+      dispatch(openCryptoOptionsModal())  
+    }   
   }
 
 
@@ -252,29 +252,32 @@ function Landing(props) {
       </section>
 
       <section className='flex flex-col md:flex-row px-10 md:px-12 lg:px-24 xl:px-42 mt-80 mb-80'>
-        <div className='px-10'>
-          <h1 className='text-4xl md:text-60px lg:text-90px'>
-            Use
+        <div className='px-10 border mx-0 md:mx-4 py-10 w-full md:w-1/2 '>
+          <h1 className='text-2xl md:text-3xl lg:text-4xl text-center'>
+            The perks of frequent & playful interaction with your companions, from consistent feeding schedules to casual talks & the occasional random walk, are plentiful.
           </h1>
-          <div className='text-xl md:text-3xl lg:text-4xl mt-5'>
-            With a taste for nounish culture, a calling to adventure, and precocious social mobility… feed them well so these rare virtual companions can continue to grow with time.  
-            <br /><br />
-            Take good care of your Renounables. 
-            <br /><br />
-            Who knows what magical places they will unlock for you. 
+          <div className='text-lg md:text-xl lg:text-2xl mt-5 text-center font-extralight'>
+            Sustain high levels of vitality & healthy growth of essential stats to unlock speciality memberships for virtual & IRL microfactory co-ops. These are magical places dedicated to creative coordination & seizing the memes of nounish production.
+          </div>
+          <div className='w-full text-center flex justify-center'>
+            <img src='/images/homepage/room.png' />
           </div>
         </div>
 
-        <div className='mt-20 md:mt-0 px-10'>
-          <h1 className='text-4xl md:text-60px lg:text-90px'>
-            Rescue
+        <div className='mx-0 md:mx-4 mt-20 md:mt-0 px-10 border py-10  w-full md:w-1/2'>
+          <h1 className='text-2xl md:text-3xl lg:text-4xl text-center'>
+            As you might have already guessed, neglecting your virtual companion can have dire consequeces… similar to the occacional relationship IRL.
           </h1>
-          <div className='text-xl md:text-3xl lg:text-4xl mt-5'>
-            With a taste for nounish culture, a calling to adventure, and precocious social mobility… feed them well so these rare virtual companions can continue to grow with time.  
+          <div className='text-lg md:text-xl lg:text-2xl mt-5 text-center font-extralight'>
+            The speed with which the situation for a nearly forgotten flame goes from alarming, to critical, to virtually hopeless can be stunning. Yet, all hope is not lost.
             <br /><br />
-            Take good care of your Renounables. 
+            Good game balance calls sometimes for the carrot, and others for the stick. When renounables are left to cycle helplessly from starvation and negligence to deep hibernation and back again, neverendingly, it becomes time for a bit of both.
             <br /><br />
-            Who knows what magical places they will unlock for you. 
+            For nounish collectors and instructables proliferators inclined to sweep in to the rescue of companions whose vitality & stats hover ever closer to 0, active bids are displayed in a dedicated rescue dashboard currentlly being built.
+            <br /><br />
+            And for those who have forgotten to bring home enough ⌐◨-◨ feed to share a few too many times, stay near the top of the negligence charts long enough and you might win entry to the the record halls of shame. 
+            <br /><br />
+            Funny thing about composability, reputation, and long memory…
           </div>
         </div>
       </section>
