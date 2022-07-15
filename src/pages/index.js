@@ -88,17 +88,17 @@ function Landing(props) {
         your own name & game... <br />
       </section>
 
-      <img className='mt-40 px-0 md:px-8' src='/images/homepage/renounables.png' />
+      <img className='mt-0 md:mt-40 px-0 md:px-8' src='/images/homepage/renounables.png' />
       <img className='w-1/2 md:w-2/6 my-48 px-8' src='/images/homepage/renoun1.png' />
 
-      <section className='flex flex-row w-full justify-center mt-80 flex-wrap'>
+      <section className='flex flex-row w-full justify-center mt-20 md:mt-80 flex-wrap'>
         <img className='w-1/3 md:w-1/6 mx-4 px-1 md:px-4 object-contain' src='/images/homepage/renoun2.png' />
         <img className='w-1/3 md:w-1/6 mx-4 px-1 md:px-4 object-contain' src='/images/homepage/renoun3.png' />
         <img className='w-1/3 md:w-1/6 mx-4 px-1 md:px-4 object-contain' src='/images/homepage/renoun4.png' />
         <img className='w-1/3 md:w-1/6 mx-4 px-1 md:px-4 object-contain' src='/images/homepage/renoun5.png' />
       </section>
 
-      <section className='flex flex-row w-3/5 justify-center my-80 text-center text-lg md:text-2xl lg:text-3xl'>
+      <section className='flex flex-row w-3/5 justify-center my-10 md:my-20 text-center text-lg md:text-2xl lg:text-3xl'>
         With a taste for nounish culture, a calling to adventure, and precocious social mobility… feed them well so these rare virtual companions can continue to grow with time.  
         <br /><br />
         Take good care of your Renounables. 
@@ -106,7 +106,7 @@ function Landing(props) {
         Who knows what magical places they will unlock for you. 
       </section>
       
-      <section className='flex flex-col md:flex-row mt-40 mb-80'>
+      <section className='flex flex-col md:flex-row my-20 md:my-80'>
         <div className='w-full md:w-1/2 px-5 md:pl-24 md:px-0 lg:pl-32 grid grid-cols-3 gap-10 h-fit'>
         {
           Array.from({length: 9}).fill().map((item, index) => {
@@ -136,7 +136,7 @@ function Landing(props) {
             </span>
           </div>
           <div className='mt-4 text-lg md:text-xl lg:text-2xl'>
-            We recognize ourselves 
+            We recognize ourselves&nbsp;
             <span className='font-extralight'>
               in the invitation to create & the freedom to build.
             </span>
@@ -157,7 +157,7 @@ function Landing(props) {
         </div>
       </section>
 
-      <section className='mt-80 pt-20 w-full flex flex-col items-center' id='mint-section'>
+      <section className='mt-0 md:mt-80 pt-20 w-full flex flex-col items-center' id='mint-section'>
         <div className='w-300px lg:w-700px bg-gray-400 h-96'  />
         <div className='w-300px lg:w-700px text-xl md:text-3xl lg:text-60px text-center mt-32'>
           DO YOU REALLY NEED TO READ THE INSTRUCTION MANUAL?
@@ -220,7 +220,7 @@ function Landing(props) {
         </div>
       </section>
 
-      <section className='flex flex-col justify-center mb-80'>
+      <section className='flex flex-col justify-center mb-20 md:mb-80'>
         <div className='w-300px lg:w-700px text-xl md:text-3xl lg:text-4xl text-center mt-16'>
           The next instructable pack is ready to mint.
         </div>
@@ -234,7 +234,7 @@ function Landing(props) {
         </div>
       </section>
 
-      <section className='mt-80 mb-80 flex flex-col md:flex-row px-10 md:px-12 lg:px-24 xl:px-42'>
+      <section className='my-20 md:my-80 flex flex-col md:flex-row px-10 md:px-12 lg:px-24 xl:px-42'>
         <div className='w-full md:w-5/12'>
           <img src='/images/homepage/nounces.png' />
         </div>
@@ -251,7 +251,7 @@ function Landing(props) {
         </div>
       </section>
 
-      <section className='flex flex-col md:flex-row px-10 md:px-12 lg:px-24 xl:px-42 mt-80 mb-80'>
+      <section className='my-20 md:my-80 flex flex-col md:flex-row px-10 md:px-12 lg:px-24 xl:px-42'>
         <div className='px-10 border mx-0 md:mx-4 py-10 w-full md:w-1/2 '>
           <h1 className='text-2xl md:text-3xl lg:text-4xl text-center'>
             The perks of frequent & playful interaction with your companions, from consistent feeding schedules to casual talks & the occasional random walk, are plentiful.
@@ -292,12 +292,12 @@ function Landing(props) {
         stay vigilant & curious.
       </section>
 
-      <section className='flex flex-row justify-between w-full p-5'>
+      <section className='flex flex-row justify-between w-full p-3 md:p-5'>
         <a className='animButton cursor-pointer'>
-          <img src='/images/homepage/footer/twitter.png' />
+          <img className='w-6 h-6 md:w-12 md:h-12' src='/images/homepage/footer/twitter.png' />
         </a>
-        <img src='/images/homepage/footer/red-nounce.png' />
-        <img src='/images/homepage/footer/zero.png' />
+        <img className='w-12 md:w-24 object-contain' src='/images/homepage/footer/red-nounce.png' />
+        <img className='w-6 h-6 md:w-12 md:h-12' src='/images/homepage/footer/zero.png' />
       </section>
     </div>
       
