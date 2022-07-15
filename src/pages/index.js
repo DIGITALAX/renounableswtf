@@ -1,61 +1,58 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Image from 'next/image'
 
 import Button from '@components/Button'
 import { getAccount } from '@selectors/user.selectors'
 import { getChainId } from '@selectors/global.selectors'
 import {
-  openConnectMetamaskModal,
-  openSignupModal,
   openCryptoOptionsModal,
   openSwitchNetworkModal
 } from '@actions/modals.actions'
-import { getUser } from '@helpers/user.helpers'
+
+import userActions from '@actions/user.actions'
+
 import {
-  POLYGON_CHAINID
+  POLYGON_CHAINID,
+  WALLET_METAMASK
 } from '@constants/global.constants'
 
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window
-  return {
-    width,
-    height,
-  }
-}
-
-function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions())
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  return windowDimensions
-}
-
 function Landing(props) {
-  const screenWidth = useWindowDimensions().width
-  const [isMobile, setIsMobile] = useState(false)
   const account = useSelector(getAccount)
   const chainId = useSelector(getChainId)
-  const user = useSelector(getUser)
   const dispatch = useDispatch()
    
-  useEffect(() => {
-    screenWidth > 707 ? setIsMobile(false) : setIsMobile(true)
-  }, [screenWidth])
+  const handleConnectClick = (source) => {
+    dispatch(userActions.tryToConnect(source))
+  }
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      console.log('here')
+  const findPos = obj => {
+    var curtop = 0
+    if (obj.offsetParent) {
+      do {
+          curtop += obj.offsetTop;
+      } while (obj = obj.offsetParent)
+      return [curtop]
     }
-  }, []);
+  }
+
+  const goDownToMintSection = () => {
+    window.scrollBy({
+      top: findPos(document.getElementById("mint-section")),
+      behavior: 'smooth'
+    })
+  }
+
+  const onClickCollectButton = () => {
+    if (!account) {
+      handleConnectClick(WALLET_METAMASK)
+    }
+
+    if (chainId != POLYGON_CHAINID) {
+      dispatch(openSwitchNetworkModal())
+    }
+
+    dispatch(openCryptoOptionsModal())
+  }
 
 
   return (
@@ -65,14 +62,23 @@ function Landing(props) {
           <div className='py-2 text-md md:text-2xl lg:text-4xl border-t-2'>
             instructables mint — live now
           </div>
-          <a onClick={() => {}} className='w-6 h-6 md:w-8 md:h-8 ml-3 animButton cursor-pointer'>
+          <a onClick={() => goDownToMintSection()} className='w-6 h-6 md:w-8 md:h-8 ml-3 animButton cursor-pointer'>
             <img src='/images/homepage/arrow.png' className='w-6 h-6 md:w-8 md:h-8'/>
           </a>
         </div>
         <div className='p-2 md:p-5'>
-          <Button className='text-lg md:text-2xl lg:text-4xl'>
-            connect
-          </Button>
+          {
+            !account && <Button className='text-lg md:text-2xl lg:text-4xl' onClick={() => handleConnectClick(WALLET_METAMASK)}>
+              connect
+            </Button>
+          }
+          {
+            account && <div className='text-lg md:text-2xl lg:text-4xl'>
+              {
+                account.substring(0, 6) + '...' + account.substring(account.length - 4, account.length)
+              }
+            </div>
+          }
         </div>
       </section>
 
@@ -106,7 +112,7 @@ function Landing(props) {
           Array.from({length: 9}).fill().map((item, index) => {
             if (index === 8) {
               return (
-                <div className='flex flex-row justify-between px-3 items-center'>
+                <div key={index} className='flex flex-row justify-between px-3 items-center'>
                   <img className='w-1/6 h-fit' src={`/images/homepage/nouncearts/asterisk.png`} />
                   <img className='w-1/6 h-fit' src={`/images/homepage/nouncearts/asterisk.png`} />
                   <img className='w-1/6 h-fit' src={`/images/homepage/nouncearts/asterisk.png`} />
@@ -114,7 +120,7 @@ function Landing(props) {
               )
             }
             return (
-              <img src={`/images/homepage/nouncearts/art${index + 1}.png`} />
+              <img key={index} src={`/images/homepage/nouncearts/art${index + 1}.png`} />
             )
           })
         }
@@ -151,7 +157,7 @@ function Landing(props) {
         </div>
       </section>
 
-      <section className='mt-80 pt-20 w-full flex flex-col items-center'>
+      <section className='mt-80 pt-20 w-full flex flex-col items-center' id='mint-section'>
         <div className='w-300px lg:w-700px bg-gray-400 h-96'  />
         <div className='w-300px lg:w-700px text-xl md:text-3xl lg:text-60px text-center mt-32'>
           DO YOU REALLY NEED TO READ THE INSTRUCTION MANUAL?
@@ -222,7 +228,7 @@ function Landing(props) {
           0.5 ETH
         </div>
         <div className='mt-8 text-center'>
-          <Button className='text-lg md:text-2xl lg:text-4xl'>
+          <Button className='text-lg md:text-2xl lg:text-4xl' onClick={() => onClickCollectButton()}>
             collect
           </Button>
         </div>

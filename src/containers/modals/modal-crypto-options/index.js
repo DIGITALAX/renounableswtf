@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import { MaxUint256 } from '@ethersproject/constants'
+import { ethers } from 'ethers'
 
 import cryptoActions from '@actions/crypto.actions'
 import {
@@ -10,59 +10,31 @@ import {
   openPurchaseSuccessModal
 } from '@actions/modals.actions'
 
-import {
-  getPayableTokenReport
-} from '@services/api/apiService'
-
 import { 
   getSelectedCrypto,
-  getTicketPrice
 } from '@selectors/crypto.selectors'
 
 import useERC20Approve from '@hooks/useERC20Approve'
 
-import {
-  getERC20ContractAddressByChainId
-} from '@services/network.service'
-
-import { POLYGON_CHAINID } from '@constants/global.constants'
-
-import { convertToWei } from '@helpers/price.helpers'
-
 import Button from '@components/Button'
 import Modal from '@components/modal'
 
-import styles from './styles.module.scss'
-
-
 const cryptoList = [
+  {
+    name: 'matic',
+    label: 'MATIC'
+  },
   {
     name: 'mona',
     label: 'MONA'
-  },
-  {
-    name: 'dai',
-    label: 'DAI'
   },
   {
     name: 'weth',
     label: 'ETH'
   },
   {
-    name: 'bnt',
-    label: 'BNT'
-  },
-  {
     name: 'usdt',
     label: 'USDT'
-  },
-  {
-    name: 'w3f',
-    label: 'W3F'
-  },
-  {
-    name: 'matic',
-    label: 'MATIC'
   }
 ]
 
@@ -70,34 +42,12 @@ const cryptoList = [
 const ModalCryptoOptions = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
-  const [cryptoPrice, setCryptoPrice] = useState(1)
-  const { approved, approveFunc, sendCrypto } = useERC20Approve(MaxUint256)
+  const { approved, approveFunc, purchaseOffer } = useERC20Approve(ethers.utils.parseEther("20000000000"))
 
   const selectedCrypto = useSelector(getSelectedCrypto)
-  const ticketPrice = useSelector(getTicketPrice)
 
   const handleClose = () => {
     dispatch(closeCryptoOptionsModal())
-  }
-
-  const fetchCryptoPrice = async crypto => {
-    if (crypto === 'usdt' || crypto === 'dai') {
-      setCryptoPrice(1)
-      return
-    }
-
-    const erc20ContractAddress = getERC20ContractAddressByChainId(crypto.toLowerCase(), POLYGON_CHAINID)
-
-    const result = await getPayableTokenReport(
-      POLYGON_CHAINID, erc20ContractAddress
-    )
-
-    if (!result) return
-    const { payableTokenReport } = result
-
-    if (!payableTokenReport) return
-
-    setCryptoPrice(payableTokenReport.payload / 1e18)
   }
 
   useEffect(() => {
@@ -105,12 +55,6 @@ const ModalCryptoOptions = () => {
       dispatch(cryptoActions.setCrypto(window.localStorage.getItem('CRYPTO_OPTION') || ''))
     }
   }, [])
-
-  useEffect(() => {
-    if (selectedCrypto) { 
-      fetchCryptoPrice(selectedCrypto)
-    }
-  }, [selectedCrypto])
 
   const onCryptoOptionSelect = option => {
     if (!loading) {
@@ -132,7 +76,7 @@ const ModalCryptoOptions = () => {
       }
     } else {
       setLoading(true)
-      const { promise, unsubscribe } = await sendCrypto(convertToWei(cryptoPrice * ticketPrice))
+      const { promise, unsubscribe } = await purchaseOffer()
 
       await promise
       .then(async (hash) => {
@@ -146,7 +90,6 @@ const ModalCryptoOptions = () => {
         console.log(err)
         unsubscribe()
         setLoading(false)
-
         dispatch(closeCryptoOptionsModal())
         toast(err.message)
       })
@@ -156,18 +99,18 @@ const ModalCryptoOptions = () => {
   return (
     <>
       {createPortal(
-        <Modal onClose={() => handleClose()} className={styles.cryptoOptions}>
-          <div className={styles.modalItem}>
-            <p className={styles.description}> Choose A Token To Get A Ticket. </p>
-            <div className={styles.cryptoList}>
+        <Modal onClose={() => handleClose()} className='bg-black max-w-lg'>
+          <div className='flex flex-col items-center'>
+            <p className='text-center text-2xl mt-4'>CHOOSE PAYMENT TOKEN</p>
+            <div className='flex flex-row justify-center items-center flex-wrap gap-3 md:gap-6 mt-4 w-4/5'>
               {
                 cryptoList.map(cryptoItem => {
                   const { name, label } = cryptoItem
                   return (
                     <div
-                      className={`${styles.cryptoIcon} ${
-                        selectedCrypto === name && styles.selected
-                      } ${loading && styles.disabled}`}
+                      className={`cryptoIcon ${
+                        selectedCrypto === name && 'selected'
+                      } ${loading && 'disabled'}`}
                       onClick={() => onCryptoOptionSelect(name)}
                       key={name}
                     >
@@ -180,12 +123,12 @@ const ModalCryptoOptions = () => {
             </div>
 
             <Button
-              className={styles.approveButton}
+              className='bg-black flex justify-center text-white w-28 mt-5'
               onClick={onApprove}
               disabled={!cryptoList.length}
               loading={loading}
             >
-              {!approved ? 'Approve' : 'Purchase'}
+              {!approved ? 'Approve' : 'Mint'}
             </Button>
           </div>
         </Modal>,

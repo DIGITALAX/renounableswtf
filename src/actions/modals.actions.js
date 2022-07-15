@@ -32,8 +32,8 @@ export const closeModal = (modalNameInReducer, statusScroll) => (dispatch) => {
 export const openConnectMetamaskModal = () => (dispatch) => dispatch(openModal('isShowModalConnectMetamask', 'hideScroll'))
 export const closeConnectMetamaskModal = () => (dispatch) => dispatch(closeModal('isShowModalConnectMetamask', 'addScroll'))
 
-export const openNotInstalledMetamask = () => (dispatch) => dispatch(openModal('isShowNotificationConnectMetamask'))
-export const closeNotInstalledMetamask = () => (dispatch) => dispatch(closeModal('isShowNotificationConnectMetamask'))
+export const openNotInstalledMetamask = () => (dispatch) => dispatch(openModal('isShowModalNoMetamask'))
+export const closeNotInstalledMetamask = () => (dispatch) => dispatch(closeModal('isShowModalNoMetamask'))
 
 export const openPreviewMaterialModal = (params) => (dispatch) => dispatch(openModal('isShowPreviewMaterial', 'hideScroll', params))
 export const closePreviewMaterialModal = () => (dispatch) => dispatch(closeModal('isShowPreviewMaterial', 'addScroll'))

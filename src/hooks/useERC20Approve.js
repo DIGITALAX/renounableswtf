@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { ethers } from 'ethers'
 
 import { formatEther } from '@ethersproject/units'
 
@@ -7,12 +8,16 @@ import { getAccount } from '@selectors/user.selectors'
 import { getChainId } from '@selectors/global.selectors'
 import {
   getSelectedCrypto,
-  getTicketPrice
 } from '@selectors/crypto.selectors'
 
 import {
-  getERC20TokenContract
+  getERC20TokenContract,
+  getMarketplaceContract
 } from '@services/contract.service'
+
+import {
+  getERC20ContractAddressByChainId
+} from '@services/network.service'
 
 import config from '@utils/config'
 
@@ -20,6 +25,7 @@ import { POLYGON_CHAINID } from '@constants/global.constants'
 
 import { useIsMainnet } from './useIsMainnet'
 import usePollar from './usePollar'
+import Web3 from 'web3'
 
 export function useTokenAllowance() {
   const [allowance, setAllowance] = useState('0')
@@ -35,9 +41,7 @@ export function useTokenAllowance() {
 
   const fetchAllowance = useCallback(async () => {
     // Only Polygon is acceptable
-    // Currently we support only Mona and wEth tokens
     if (account && chainId && chainId == POLYGON_CHAINID) {
-
       if (selectedCryptoRef.current === 'matic') {
         setAllowance(await '10000000000')
       } else {
@@ -86,8 +90,6 @@ export default function useERC20Approve(amount) {
     }
   }, [amount, allowance, selectedCrypto])
 
-  const isMainnet = useIsMainnet()
-
   const selectedCryptoRef = useRef(selectedCrypto)
   selectedCryptoRef.current = selectedCrypto
 
@@ -97,39 +99,49 @@ export default function useERC20Approve(amount) {
       const contract = await getERC20TokenContract(selectedCryptoRef.current, chainId)
 
       try {
-        contract && await contract.methods.approve(targetAddress, amount).send({ from: account });
+        const web3 = new Web3(window.ethereum)
+        const gas = await web3.eth.getGasPrice()
+        contract && await contract.methods.approve(targetAddress, amount).send({ from: account, gasPrice: gas })
       } catch (e) {
-        console.log({ e });
-        throw e;
+        console.log({ e })
+        throw e
       }      
     }
   }
 
-  // sendAmount should be calculated as actual price before calling this function
-
-  const sendCrypto = async (sendAmount) => {
-    // if (
-    //   selectedCrypto != 'mona' && 
-    //   selectedCrypto != 'weth' && 
-    //   selectedCrypto != 'usdt' && 
-    //   selectedCrypto != 'w3f' && 
-    //   selectedCrypto != 'matic' && 
-    //   selectedCrypto != 'dai'
-    // ) return
-
-    const contract = await getERC20TokenContract(selectedCryptoRef.current, chainId)
+  const purchaseOffer = async () => {
+    if (
+      selectedCrypto != 'mona' && 
+      selectedCrypto != 'weth' &&
+      selectedCrypto != 'usdt' &&
+      selectedCrypto != 'matic'
+    ) return
+    
+    // get Marketplace Contract
+    const contract = await getMarketplaceContract(POLYGON_CHAINID)
 
     try {
+      const web3 = new Web3(window.ethereum)
+      const gas = await web3.eth.getGasPrice()
+      const address = await getERC20ContractAddressByChainId(selectedCrypto, chainId)    
+      
+      console.log('gas price: ', gas)
+      console.log('contract.methods: ', contract)
       const listener = contract.methods
-        .transfer(targetAddress, sendAmount)
-        .send({ from: account })
-
+        .buyOffer(
+          address,
+          0,
+          0
+        )
+        .send({
+          from: account,
+          gasPrice: gas
+        })
+  
       const promise = new Promise((resolve, reject) => {
         listener.on('error', (error) => reject(error))
         listener.on('confirmation', (transactionHash) => resolve(transactionHash))
       })
-
-      console.log('listener: ', listener)
   
       return {
         promise,
@@ -138,13 +150,13 @@ export default function useERC20Approve(amount) {
           listener.off('confirmation')
         },
       }
-    } catch (e) {
-      console.log({ e })
-      throw e
-    }
+    } catch (err) {
+      console.log(err)
+      throw err
+    }    
   }
 
   console.log('selectedCrypto: ', selectedCrypto)
   console.log('approved: ', approved)
-  return { approved, approveFunc, sendCrypto }
+  return { approved, approveFunc, purchaseOffer }
 }

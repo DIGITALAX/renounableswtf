@@ -3,12 +3,13 @@ import cloneDeep from 'lodash.clonedeep'
 import { Map } from 'immutable'
 
 const DEFAULT_FIELDS = Map({
+  isShowModalNoMetamask: false,
+
   isShowModalConnectMetamask: false,
   isShowModalPlaceBid: false,
   isShowModalRaiseBid: false,
   isShowModalWithdrawBid: false,
   isShowModalSignup: false,
-  isShowNotificationConnectMetamask: false,
   isShowBuyNow: false,
   isShowPreviewMaterial: false,
   isSwitchNetwork: false,

@@ -5,14 +5,9 @@ import { isMetamaskInstalled } from '@services/metamask.service'
 import {
   getDefaultNetworkChainId,
   getEnabledNetworkByChainId,
-  getAPIUrlByChainId,
-  getWSUrlByChainId,
 } from '@services/network.service'
 
-import api from '@services/api/api.service'
 import ws from '@services/api/ws.service'
-
-import { STORAGE_IS_LOGGED_IN } from '@constants/storage.constants'
 
 class GlobalActions extends BaseActions {
 
@@ -33,16 +28,10 @@ class GlobalActions extends BaseActions {
        */
       ethereum.on('accountsChanged', (accounts) => {
         const [account] = accounts
-        if (localStorage.getItem(STORAGE_IS_LOGGED_IN)) {
-          dispatch(userActions.setValue('account', account || null))
-          localStorage.setItem(STORAGE_IS_LOGGED_IN, 1)
-        }
+        console.log('changed account: ', account)
       })
 
-      if (
-        ethereum.selectedAddress
-        && localStorage.getItem(STORAGE_IS_LOGGED_IN)
-      ) {
+      if (ethereum.selectedAddress) {
         dispatch(userActions.setValue('account', ethereum.selectedAddress))
       }
 
@@ -68,13 +57,7 @@ class GlobalActions extends BaseActions {
 
   changeNetwork(chainId) {
     return async (dispatch) => {
-      const url = getAPIUrlByChainId(chainId)
-      const wsUrl = getWSUrlByChainId(chainId)
-
-      console.log({url})
-
-      api.setUrl(url)
-      ws.setUrl(wsUrl)
+      ws.create()
       dispatch(this.setValue('chainId', chainId))
     }
   }

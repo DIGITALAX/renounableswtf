@@ -27,17 +27,7 @@ export const requestSwitchNetwork = () => {
       console.log(err)
     })
 
-  }
-export const getAPIUrlByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId);
-
-  if (!network || !config.API_URLS[network.alias]) {
-    return config.API_URLS[config.DEFAULT_NETWORK];
-  }
-
-  return config.API_URLS[network.alias];
-};
-
+}
 
 export const getDefaultNetworkChainId = () => {
   const network = AVAILABLE_NETWORKS.find((net) => net.alias === config.DEFAULT_NETWORK);
@@ -49,30 +39,20 @@ export const getDefaultNetworkChainId = () => {
   return network.hex;
 };
 
-export const getWSUrlByChainId = (chainId) => {
-  const url = getAPIUrlByChainId(chainId);
-
-  if (!url) {
-    throw new Error('Invalid chainId: getWSUrlByChainId');
-  }
-
-  return url.replace('http', 'ws');
-};
-
 const ERC20TokenAddresses = {
   mona: config.MONA_TOKEN_ADDRESSES,
-  bnt: config.BANCOR_ADDRESSES,
   usdt: config.USDT_ADDRESS,
   weth: config.WETH_ADDRESS,
-  dai: config.DAI_ADDRESS,
-  w3f: config.W3F_ADDRESS,
   matic: config.MATIC_ADDRESS
 }
 
 export const getERC20ContractAddressByChainId = (tokenId, chainId) => {
   const network = getEnabledNetworkByChainId(chainId)
-  console.log('tokenId:', tokenId)
-  console.log('ERC20TokenAddresses[bnt]:', ERC20TokenAddresses)
+
   if (!Object.keys(ERC20TokenAddresses).find(key => key == tokenId)) return null
   return ERC20TokenAddresses[tokenId][network?.alias].toLowerCase()
+}
+
+export const getMarketplaceContractAddress = () => {
+  return config.MARKETPLACE_ADDRESSES['matic']
 }

@@ -7,12 +7,6 @@ class CryptoActions extends BaseActions {
       dispatch(this.setValue('selectedCrypto', crypto))
     }
   }
-
-  setTicketPrice(price) {
-    return async (dispatch) => {
-      dispatch(this.setValue('ticketPrice', price))
-    }
-  }
 }
 
 export default new CryptoActions(cryptoReducer)

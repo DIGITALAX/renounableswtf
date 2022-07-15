@@ -22,18 +22,19 @@ const PurchaseSuccess = ({ className }) => {
       {createPortal(
         <Modal
           onClose={() => handleClose()}
-          title={'Success! See You There!'}
+          title={'Salutations!'}
           titleStyle={styles.textCenter}
-          className={className}
+          className='bg-black max-w-lg'
         >
           <div className={styles.footer}>
             <p className={styles.footerCaption}>
               <span>
-                You will be sent your NFT Ticket shortly. 
+                Your instructable bundle has minted! 
+
+                This is a momentous step on your journey to seizing the memes of nounish mass proliferation. 
+
+                Make sure to verify your shipping information here to receive your printed materials and apparel. Shipping takes approx 3-4 weeks, contigent on continued global supply chain hiccups.
               </span>
-              {/* <p>
-                You can stake your fashion for $MONA yield <a href="https://staking.digitalax.xyz/" target="_blank">here!</a>
-              </p> */}
             </p>
             <div className={styles.selectWrapper}>
               <Button

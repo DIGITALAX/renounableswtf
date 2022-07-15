@@ -5,7 +5,6 @@ import TransformModules from '../utils/transform-modules'
 
 const DEFAULT_FIELDS = Map({
   selectedCrypto: 'weth',
-  ticketPrice: 200, // USD
 })
 
 export default createModule({
