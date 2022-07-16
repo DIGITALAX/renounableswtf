@@ -14,7 +14,7 @@ const ModalConnectWallet = ({ title }) => {
   return (
     <>
       {createPortal(
-        <Modal onClose={() => handleClose()} title={title} className='flex flex-col items-center'>
+        <Modal onClose={() => handleClose()} title={title} className='flex flex-col items-center max-w-md'>
           Please install the metamask to continue.
         </Modal>,
         document.body

@@ -99,7 +99,7 @@ const ModalCryptoOptions = () => {
   return (
     <>
       {createPortal(
-        <Modal onClose={() => handleClose()} className='bg-black max-w-lg'>
+        <Modal onClose={() => handleClose()} className='bg-black'>
           <div className='flex flex-col items-center'>
             <p className='text-center text-2xl mt-4'>CHOOSE PAYMENT TOKEN</p>
             <div className='flex flex-row justify-center items-center flex-wrap gap-3 md:gap-6 mt-4 w-4/5'>
