@@ -158,8 +158,10 @@ function Landing(props) {
       </section>
 
       <section className='mt-0 md:mt-80 pt-20 w-full flex flex-col items-center' id='mint-section'>
-        <div className='w-300px lg:w-700px bg-gray-400 h-96'  />
-        <div className='w-300px lg:w-700px text-xl md:text-3xl lg:text-60px text-center mt-32'>
+        <div className='w-1/3 bg-gray-400 h-50'>
+          <img src='/images/homepage/pack.gif' />
+        </div>
+        <div className='w-300px lg:w-700px text-xl md:text-3xl lg:text-60px text-center mt-20'>
           DO YOU REALLY NEED TO READ THE INSTRUCTION MANUAL?
         </div>
         <div className='w-300px lg:w-700px text-xl md:text-3xl lg:text-4xl text-center mt-16'>
@@ -192,8 +194,8 @@ function Landing(props) {
             each pack includes:
 
             <div className='mt-10 flex flex-row flex-wrap'>
-              <div className='w-1/2 mb-3 pr-3'>1x digital instructable NFT</div>
-              <div className='w-1/2 mb-3 pr-3'>10x vinyl stickers</div>
+              <div className='w-1/2 mb-3 pr-1'>1x digital instructable NFT</div>
+              <div className='w-1/2 mb-3 pr-1'>10x vinyl stickers</div>
               <div className='w-1/2 mb-3 pr-3'>1x organic shirt</div>
               <div className='w-1/2 mb-3 pr-3'>1x large print poster</div>
               <div className='w-1/2 mb-3 pr-3'>1x organic hoodie</div>
@@ -245,7 +247,7 @@ function Landing(props) {
             SHOWS IN THE LIL’ DETAILS <br />
             TOO RARE TO MISS
           </h1>
-          <div className='mt-10 font-extralight text-lg md:text-xl lg:text-3xl text-center md:text-left'>
+          <div className='mt-10 font-extralight text-lg md:text-xl lg:text-3xl text-center md:text-center'>
             Like most people, renounables like good company, frequent time to play or explore, and care a lot about what you ⌐◨-◨ feed them.
           </div>
         </div>

@@ -5,7 +5,7 @@
     "dev": "next -p 3007",
     "build": "next build",
     "postbuild": "next-sitemap",
-    "start": "NODE_ENV=production PORT=27320 node server.js",
+    "start": "NODE_ENV=production PORT=27320 node server.js --openssl-legacy-provider",
     "export": "next build && next export",
     "audit": "audit-ci --config audit-ci.json",
     "lint": "eslint \"src/**/*.js\" \"*.js\"",
