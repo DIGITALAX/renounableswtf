@@ -114,8 +114,8 @@ function Landing(props) {
               return (
                 <div key={index} className='flex flex-row justify-between px-3 items-center'>
                   <img className='w-1/6 h-fit object-contain' src={`/images/homepage/nouncearts/asterisk.png`} />
-                  <img className='w-1/6 h-fit' src={`/images/homepage/nouncearts/asterisk.png`} />
-                  <img className='w-1/6 h-fit' src={`/images/homepage/nouncearts/asterisk.png`} />
+                  <img className='w-1/6 h-fit object-contain' src={`/images/homepage/nouncearts/asterisk.png`} />
+                  <img className='w-1/6 h-fit object-contain' src={`/images/homepage/nouncearts/asterisk.png`} />
                 </div>
               )
             }
@@ -179,7 +179,7 @@ function Landing(props) {
         </div>
       </section>
 
-      <section className='flex flex-col md:flex-row px-10 md:px-12 lg:px-44 xl:px-52'>
+      <section className='flex flex-col md:flex-row px-10 md:px-12 lg:px-44 xl:px-52 overflow-visible'>
         <div className='w-full md:w-5/12 md:pr-10'>
           <div className='mb-10 itemwith-sign'>
             5 mini collections of instructables packs
