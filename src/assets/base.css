@@ -160,10 +160,9 @@ a {
   left: -34px;
   width: 14px;
   height: 16px;
-  bottom: 0;
-  background-image: url('../../public/images/homepage/asterisk_blank.png') ;
+  background-image: url('../../public/images/homepage/asterisk_blank.png') 0 0 / contain !important;
   /* background-size: 100% 100%; */
-  background-size: contain !important;
+  /* background-size: contain !important; */
 }
 
 .notificationBox {
