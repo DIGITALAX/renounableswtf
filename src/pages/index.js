@@ -181,25 +181,35 @@ function Landing(props) {
 
       <section className='flex flex-col md:flex-row px-10 md:px-12 lg:px-44 xl:px-52 overflow-visible'>
         <div className='w-full md:w-5/12 md:pr-10 overflow-visible'>
-          <div className='mb-10 itemwith-sign'>
-            5 mini collections of instructables packs
+          <div className='mb-10 flex flex-row items-start itemwith-sign'>
+            <img src='/images/homepage/asterisk_blank.png' />
+            <div>5 mini collections of instructables packs</div>
           </div>
-          <div className='mb-10 itemwith-sign'>
-            which packs you collect is randomly determined from remaining selection at time of mint
+          <div className='mb-10 flex flex-row items-start itemwith-sign'>
+            <img src='/images/homepage/asterisk_blank.png' />
+            <div>
+              which packs you collect is randomly determined from remaining selection at time of mint
+            </div>
           </div>
-          <div className='mb-10 itemwith-sign'>
-            inaugural run is limited to 500 max packs minted
+          <div className='mb-10 flex flex-row items-start itemwith-sign'>
+            <img src='/images/homepage/asterisk_blank.png' />
+            <div>
+              inaugural run is limited to 500 max packs minted
+            </div>
           </div>
-          <div className='mb-10 itemwith-sign'>
-            each pack includes:
+          <div className='mb-10 flex flex-row items-start itemwith-sign'>
+            <img src='/images/homepage/asterisk_blank.png' />
+            <div>
+              each pack includes:
 
-            <div className='mt-10 flex flex-row flex-wrap'>
-              <div className='w-1/2 mb-3 pr-1'>1x digital instructable NFT</div>
-              <div className='w-1/2 mb-3 pr-1'>10x vinyl stickers</div>
-              <div className='w-1/2 mb-3 pr-3'>1x organic shirt</div>
-              <div className='w-1/2 mb-3 pr-3'>1x large print poster</div>
-              <div className='w-1/2 mb-3 pr-3'>1x organic hoodie</div>
-              <div className='w-1/2 mb-3 pr-3'>3x mini print posters</div>
+              <div className='mt-10 flex flex-row flex-wrap'>
+                <div className='w-1/2 mb-3 pr-1'>1x digital instructable NFT</div>
+                <div className='w-1/2 mb-3 pr-1'>10x vinyl stickers</div>
+                <div className='w-1/2 mb-3 pr-3'>1x organic shirt</div>
+                <div className='w-1/2 mb-3 pr-3'>1x large print poster</div>
+                <div className='w-1/2 mb-3 pr-3'>1x organic hoodie</div>
+                <div className='w-1/2 mb-3 pr-3'>3x mini print posters</div>
+              </div>
             </div>
           </div>
         </div>

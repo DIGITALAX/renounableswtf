@@ -153,16 +153,22 @@ a {
   @apply text-sm md:text-lg
 }
 
+.itemwith-sign img {
+  margin-left: -34px;
+  margin-right: 10px;
+  object-fit: contain;
+}
+
 .itemwith-sign::before {
-  content: '';
+  /* content: '';
   position: absolute;
   top: 5px;
   left: -34px;
   width: 14px;
   height: 16px;
   background-image: url('../../public/images/homepage/asterisk_blank.png') 0 0 / contain !important;
-  /* background-size: 100% 100%; */
-  /* background-size: contain !important; */
+  
+  background-size: contain !important; */
 }
 
 .notificationBox {
