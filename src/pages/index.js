@@ -296,7 +296,7 @@ function Landing(props) {
 
       <section className='flex flex-row justify-between w-full p-3 md:p-5'>
         <a className='animButton cursor-pointer'>
-          <img className='w-6 h-6 md:w-12 md:h-12' src='/images/homepage/footer/twitter.png' />
+          <img className='w-6 h-6 md:w-12 md:h-12' src='/images/homepage/footer/twitter.png' href="https://twitter.com/renounables" target="_blank" rel="noreferrer"/>
         </a>
         <img className='w-12 md:w-24 object-contain' src='/images/homepage/footer/red-nounce.png' />
         <img className='w-6 h-6 md:w-12 md:h-12' src='/images/homepage/footer/zero.png' />
