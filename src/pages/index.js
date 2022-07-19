@@ -158,7 +158,7 @@ function Landing(props) {
       </section>
 
       <section className='mt-0 md:mt-80 pt-20 w-full flex flex-col items-center' id='mint-section'>
-        <div className='w-1/3 bg-gray-400 h-50'>
+        <div className='w-1/3 bg-gray-400 h-50 sm:w-1/2'>
           <img src='/images/homepage/pack.gif' />
         </div>
         <div className='w-300px lg:w-700px text-xl md:text-3xl lg:text-60px text-center mt-20'>
