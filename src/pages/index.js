@@ -180,7 +180,7 @@ function Landing(props) {
       </section>
 
       <section className='flex flex-col md:flex-row px-10 md:px-12 lg:px-44 xl:px-52 overflow-visible'>
-        <div className='w-full md:w-5/12 md:pr-10'>
+        <div className='w-full md:w-5/12 md:pr-10 overflow-visible'>
           <div className='mb-10 itemwith-sign'>
             5 mini collections of instructables packs
           </div>
